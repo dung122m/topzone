@@ -10,6 +10,7 @@ class ServiceServiceProvider extends ServiceProvider
         'App\Admin\Services\Admin\AdminServiceInterface' => 'App\Admin\Services\Admin\AdminService',
         'App\Admin\Services\User\UserServiceInterface' => 'App\Admin\Services\User\UserService',
         'App\Admin\Services\Post\PostServiceInterface' => 'App\Admin\Services\Post\PostService',
+        'App\Admin\Services\Employee\EmployeeServiceInterface' => 'App\Admin\Services\Employee\EmployeeService',
     ];
     /**
      * Register services.

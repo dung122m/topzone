@@ -69,19 +69,19 @@ return [
         ]
     ],
     [
-        'title' => 'QL Employee',
+        'title' => 'QL Nhân viên',
         'routeName' => null,
         'icon' => '<i class="ti ti-users"></i>',
         'roles' => [],
         'sub' => [
             [
-                'title' => 'Thêm employee',
+                'title' => 'Thêm Nhân viên',
                 'routeName' => 'admin.employee.create',
                 'icon' => '<i class="ti ti-plus"></i>',
                 'roles' => [],
             ],
             [
-                'title' => 'DS employee',
+                'title' => 'DS Nhân viên',
                 'routeName' => 'admin.employee.index',
                 'icon' => '<i class="ti ti-list"></i>',
                 'roles' => [],

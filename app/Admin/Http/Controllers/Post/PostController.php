@@ -4,9 +4,7 @@ namespace App\Admin\Http\Controllers\Post;
 
 use App\Admin\DataTables\Post\PostDataTable;
 use App\Admin\Http\Controllers\Controller;
-use App\Admin\Http\Requests\Admin\AdminRequest;
 use App\Admin\Http\Requests\Post\PostRequest;
-use App\Admin\Repositories\Admin\AdminRepositoryInterface;
 use App\Admin\Repositories\Post\PostRepositoryInterface;
 use App\Admin\Services\Post\PostServiceInterface;
 

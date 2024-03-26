@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [App\Admin\Http\Controllers\Home\HomeController::class, 'index']);
+
 // Route::get("/topzone-codebase/admin/login",[AdminController::class, 'login'])->name("login");s

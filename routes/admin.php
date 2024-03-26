@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth.admin:admin'], function(){
     });
     //employee
     Route::prefix('/manager-employee')->as('employee.')->group(function(){
-        Route::controller(App\Admin\Http\Controllers\Post\PostController::class)->group(function(){
+        Route::controller(App\Admin\Http\Controllers\Employee\EmployeeController::class)->group(function(){
             Route::get('/them', 'create')->name('create');
             Route::get('/', 'index')->name('index');
             Route::get('/sua/{id}', 'edit')->name('edit');

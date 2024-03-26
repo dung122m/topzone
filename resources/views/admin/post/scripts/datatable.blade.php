@@ -1,6 +1,6 @@
 <script>
     function searchColumsDataTable(datatable) {
-        datatable.api().columns([1, 2, 3, 4, 5,6,7,8]).every(function() {
+        datatable.api().columns([1, 2, 3, 4, 5,6,7]).every(function() {
             var column = this;
             var input = document.createElement("input");
             if (column.selector.cols == 6 ||column.selector.cols == 7 ) {

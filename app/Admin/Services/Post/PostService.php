@@ -32,7 +32,7 @@ class PostService implements PostServiceInterface
 
     public function update(Request $request){
         
-        $this->data = $request->safe();
+        $this->data = $request->validated();
 
         return $this->repository->update($this->data['id'], $this->data);
 

@@ -8,7 +8,8 @@ use App\Admin\Repositories\Employee\EmployeeRepositoryInterface;
 use App\Admin\Services\Employee\EmployeeServiceInterface;
 use App\Admin\DataTables\Employee\EmployeeDataTable;
 use App\Enums\Employee\EmployeeGender;
-use App\Enums\User\UserGender;
+use App\Enums\Employee\EmployeeRole;
+
 
 
 class EmployeeController extends Controller
@@ -28,9 +29,9 @@ class EmployeeController extends Controller
 
     public function getView(){
         return [
-            'index' => 'admin.employee.index',
-            'create' => 'admin.employee.create',
-            'edit' => 'admin.employee.edit'
+            'index' => 'admin.employees.index',
+            'create' => 'admin.employees.create',
+            'edit' => 'admin.employees.edit'
         ];
     }
 
@@ -45,14 +46,17 @@ class EmployeeController extends Controller
     public function index(EmployeeDataTable $dataTable){
         return $dataTable->render($this->view['index'], [
            
-            'gender' => UserGender::asSelectArray()
+            'gender' => EmployeeGender::asSelectArray(),
+            'roles' => EmployeeRole::asSelectArray()
         ]);
     }
 
     public function create(){
         return view($this->view['create'], [
            
-            'gender' => EmployeeGender::asSelectArray()
+            'gender' => EmployeeGender::asSelectArray(),
+            'roles' =>EmployeeRole::asSelectArray()
+            
         ]);
     }
 
@@ -70,9 +74,11 @@ class EmployeeController extends Controller
         return view(
             $this->view['edit'], 
             [
-                'user' => $instance, 
+                'employee' => $instance, 
                 
-                'gender' => EmployeeGender::asSelectArray()
+                'gender' => EmployeeGender::asSelectArray(),
+                'roles' => EmployeeRole::asSelectArray(),
+
             ], 
         );
 

@@ -4,6 +4,8 @@ namespace App\Admin\Services\Employee;
 
 use App\Admin\Services\Employee\EmployeeServiceInterface;
 use  App\Admin\Repositories\Employee\EmployeeRepositoryInterface;
+use App\Enums\Employee\EmployeeRole;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Admin\Traits\Setup;
 use App\Enums\Employee\EmployeeRoles;
@@ -27,8 +29,10 @@ class EmployeeService implements EmployeeServiceInterface
     public function store(Request $request){
 
         $this->data = $request->validated();
-        $this->data['code'] = $this->createCodeEmployee();
-        $this->data['roles'] = EmployeeRoles::Member;
+        $this->data['date'] = Carbon::now();
+        $this->data['roles'] = EmployeeRole::Employee;
+
+        
         $this->data['password'] = bcrypt($this->data['password']);
 
         return $this->repository->create($this->data);

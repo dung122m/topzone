@@ -18,10 +18,10 @@
     </div>
     <div class="page-body">
         <div class="container-xl">
-            <x-form :action="route('admin.user.store')" type="post" :validate="true">
+            <x-form :action="route('admin.employee.store')" type="post" :validate="true">
                 <div class="row justify-content-center">
-                    @include('admin.users.forms.create-left')
-                    @include('admin.users.forms.create-right')
+                    @include('admin.employees.forms.create-left')
+                    @include('admin.employees.forms.create-right')
                 </div>
             </x-form>
         </div>

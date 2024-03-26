@@ -3,6 +3,8 @@
 use App\Enums\Admin\AdminRoles;
 use App\Enums\Post\PostStatus;
 use App\Enums\Post\PostFeature;
+use App\Enums\Employee\EmployeeRole;
+use App\Enums\Employee\EmployeeGender;
 use App\Enums\User\{UserGender, UserVip, UserRoles};
 
 return [
@@ -31,5 +33,15 @@ return [
     PostFeature::class => [
         PostFeature::Yes->value => "Yes",
         PostFeature::No->value => "No",
-    ]
+    ],
+    EmployeeRole::class => [
+        EmployeeRole::Employee->value => "Nhân viên",
+        EmployeeRole::Manager->value => "Quản lý",
+
+    ],
+    EmployeeGender::class => [
+        EmployeeGender::Male->value => 'Nam',
+        EmployeeGender::Female->value => 'Nữ',
+        EmployeeGender::Other->value => 'Khác',
+    ],
 ];

@@ -45,10 +45,11 @@ class EmployeeDataTable extends BaseDataTable
         $this->instanceDataTable = datatables()->eloquent($query)->addIndexColumn();
         $this->filterColumnCreatedAt();
         $this->filterColumnGender();
-        $this->filterColumnVip();
+        
         $this->editColumnFullname();
         $this->editColumnGender();
-        $this->editColumnVip();
+        $this->editColumnRole();
+        
         $this->editColumnCreatedAt();
         $this->addColumnAction();
         $this->rawColumnsNew();
@@ -92,7 +93,7 @@ class EmployeeDataTable extends BaseDataTable
      * @return array
      */
     protected function setCustomColumns(){
-        $this->customColumns = $this->traitGetConfigDatatableColumns('Employee');
+        $this->customColumns = $this->traitGetConfigDatatableColumns('employee');
     }
 
     protected function filename(): string
@@ -106,12 +107,7 @@ class EmployeeDataTable extends BaseDataTable
             $query->where('gender', $keyword);
         });
     }
-    protected function filterColumnVip(){
-        $this->instanceDataTable = $this->instanceDataTable
-        ->filterColumn('vip', function($query, $keyword) {
-            $query->where('vip', $keyword);
-        });
-    }
+    
     protected function filterColumnCreatedAt(){
         $this->instanceDataTable = $this->instanceDataTable->filterColumn('created_at', function($query, $keyword) {
 
@@ -130,11 +126,12 @@ class EmployeeDataTable extends BaseDataTable
             return $admin->gender->description();
         });
     }
-    protected function editColumnVip(){
-        $this->instanceDataTable = $this->instanceDataTable->editColumn('vip', function($admin){
-            return $admin->vip->description();
+    protected function editColumnRole(){
+        $this->instanceDataTable = $this->instanceDataTable->editColumn('roles', function($admin){
+            return $admin->roles->description();
         });
     }
+
     protected function editColumnCreatedAt(){
         $this->instanceDataTable = $this->instanceDataTable->editColumn('created_at', '{{ date("d-m-Y", strtotime($created_at)) }}');
     }
@@ -150,7 +147,7 @@ class EmployeeDataTable extends BaseDataTable
 
         $this->parameters['initComplete'] = "function () {
 
-            moveSearchColumnsDatatable('#EmployeeTable');
+            moveSearchColumnsDatatable('#employeeTable');
 
             searchColumsDataTable(this);
         }";

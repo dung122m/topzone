@@ -36,7 +36,7 @@ class PostRequest extends BaseRequest
     protected function methodPut()
     {
         return [
-            
+            'id' => ['required', 'exists:App\Models\Post,id'],
             'title' => [
                 'required', 
                 'string', 'min:6', 'max:100',
