@@ -5,11 +5,14 @@ namespace App\Admin\Http\Controllers\Post;
 use App\Admin\DataTables\Post\PostDataTable;
 use App\Admin\Http\Controllers\Controller;
 use App\Admin\Http\Requests\Admin\AdminRequest;
+use App\Admin\Http\Requests\Post\PostRequest;
 use App\Admin\Repositories\Admin\AdminRepositoryInterface;
 use App\Admin\Repositories\Post\PostRepositoryInterface;
 use App\Admin\Services\Post\PostServiceInterface;
-use App\Admin\DataTables\Admin\AdminDataTable;
+
 use App\Enums\Admin\AdminRoles;
+use App\Enums\Post\PostFeature;
+use App\Enums\Post\PostStatus;
 
 class PostController extends Controller
 {
@@ -43,16 +46,18 @@ class PostController extends Controller
         ];
     }
     public function index(PostDataTable $dataTable){
-        return $dataTable->render($this->view['index'], ['roles' => AdminRoles::asSelectArray()]);
+        return $dataTable->render($this->view['index'], ['status' => PostStatus::asSelectArray(),
+    'featured' => PostFeature::asSelectArray()]);
     }
 
     public function create(){
-        return view($this->view['create'], ['roles' => AdminRoles::asSelectArray()]);
+        return view($this->view['create'], ['status' => PostStatus::asSelectArray(),'feature' => PostFeature::asSelectArray()]);
     }
 
-    public function store(AdminRequest $request){
+    public function store(PostRequest $request){
 
         $instance = $this->service->store($request);
+        
 
         return redirect()->route($this->route['edit'], $instance->id);
 
@@ -64,14 +69,15 @@ class PostController extends Controller
         return view(
             $this->view['edit'], 
             [
-                'admin' => $instance, 
-                'roles' => AdminRoles::asSelectArray() 
+                'post' => $instance, 
+                'status' => PostStatus::asSelectArray(),
+                'feature' => PostFeature::asSelectArray()
             ], 
         );
 
     }
 
-    public function update(AdminRequest $request){
+    public function update(PostRequest $request){
 
         $this->service->update($request);
 

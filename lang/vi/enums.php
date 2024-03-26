@@ -1,6 +1,8 @@
 <?php
 
 use App\Enums\Admin\AdminRoles;
+use App\Enums\Post\PostStatus;
+use App\Enums\Post\PostFeature;
 use App\Enums\User\{UserGender, UserVip, UserRoles};
 
 return [
@@ -22,4 +24,12 @@ return [
     UserRoles::class => [
         UserRoles::Member->value => 'Thành viên',
     ],
+    PostStatus::class => [
+        PostStatus::Hide->value => "Hide",
+        PostStatus::Show->value => "Show",
+    ],
+    PostFeature::class => [
+        PostFeature::Yes->value => "Yes",
+        PostFeature::No->value => "No",
+    ]
 ];

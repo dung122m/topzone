@@ -7,7 +7,7 @@
         </button>
         <h1 class="navbar-brand navbar-brand-autodark">
             <a href=".">
-                <img src="{{ asset(config('custom.images.logo')) }}" width="110" height="32" alt="Tabler"
+                <img src="{{ asset('assets/images/logo.png') }}" width="110" height="32" alt="Tabler"
                     class="navbar-brand-image">
             </a>
         </h1>

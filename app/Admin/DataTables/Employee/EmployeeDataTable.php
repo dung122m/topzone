@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Admin\DataTables\User;
+namespace App\Admin\DataTables\Employee;
 
 use App\Admin\DataTables\BaseDataTable;
-use App\Admin\Repositories\User\UserRepositoryInterface;
+use App\Admin\Repositories\Employee\EmployeeRepositoryInterface;
 use App\Admin\Traits\GetConfig;
 
-class UserDataTable extends BaseDataTable
+class EmployeeDataTable extends BaseDataTable
 {
 
     use GetConfig;
@@ -21,7 +21,7 @@ class UserDataTable extends BaseDataTable
     protected array $actions = ['reset', 'reload'];
 
     public function __construct(
-        UserRepositoryInterface $repository
+        EmployeeRepositoryInterface $repository
     ){
         parent::__construct();
 
@@ -30,8 +30,8 @@ class UserDataTable extends BaseDataTable
 
     public function getView(){
         return [
-            'action' => 'admin.users.datatable.action',
-            'editlink' => 'admin.users.datatable.editlink',
+            'action' => 'admin.employees.datatable.action',
+            'editlink' => 'admin.employees.datatable.editlink',
         ];
     }
     /**
@@ -58,10 +58,10 @@ class UserDataTable extends BaseDataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\User $model
+     * @param \App\Models\Employee $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(\App\Models\User $model)
+    public function query(\App\Models\Employee $model)
     {
         return $model->newQuery();
     }
@@ -74,7 +74,7 @@ class UserDataTable extends BaseDataTable
     public function html()
     {
         $this->instanceHtml = $this->builder()
-        ->setTableId('userTable')
+        ->setTableId('employeeTable')
         ->columns($this->getColumns())
         ->minifiedAjax()
         ->dom('Bfrtip')
@@ -92,12 +92,12 @@ class UserDataTable extends BaseDataTable
      * @return array
      */
     protected function setCustomColumns(){
-        $this->customColumns = $this->traitGetConfigDatatableColumns('user');
+        $this->customColumns = $this->traitGetConfigDatatableColumns('Employee');
     }
 
     protected function filename(): string
     {
-        return 'User_' . date('YmdHis');
+        return 'Employee_' . date('YmdHis');
     }
 
     protected function filterColumnGender(){
@@ -150,7 +150,7 @@ class UserDataTable extends BaseDataTable
 
         $this->parameters['initComplete'] = "function () {
 
-            moveSearchColumnsDatatable('#userTable');
+            moveSearchColumnsDatatable('#EmployeeTable');
 
             searchColumsDataTable(this);
         }";

@@ -8,7 +8,7 @@
             <div class="col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="control-label">{{ __('Title') }}:</label>
-                    <x-input-email name="title" :value="old('title')" :required="true" 
+                    <x-input name="title" :value="old('title')" :required="true" 
                     placeholder="{{ __('Title') }}"/>
                 </div>
             </div>
@@ -31,25 +31,28 @@
             <!-- new password confirmation-->
             <div class="col-md-6 col-sm-12">
                 <div class="mb-3">
-                    <label class="control-label">{{ __('Xác nhận mật khẩu') }}:</label>
-                    <x-input-password name="password_confirmation" :required="true"
-                        data-parsley-equalto="input[name='password']"
-                        data-parsley-equalto-message="{{ __('Mật khẩu không khớp.') }}" />
+                    <label class="control-label">{{ __('Content') }}:</label>
+                    <x-textarea name="content" :required="true"></x-textarea>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="mb-3">
-                    <label class="control-label">{{ __('Số điện thoại') }}:</label>
-                    <x-input-phone name="phone" :value="old('phone')" :required="true" />
+                    <label class="control-label">{{ __('Is Featured ?') }}</label>
+                    <x-select name="is_featured" :required="true">
+                        <x-option value="" :title="__('Chọn')" />
+                        @foreach ($feature as $key => $value)
+                            <x-option :value="$key" :title="__($value)" />
+                        @endforeach
+                    </x-select>
                 </div>
             </div>
             <!-- Role -->
             <div class="col-md-6 col-sm-12">
                 <div class="mb-3">
-                    <label class="control-label">{{ __('Roles') }}:</label>
-                    <x-select name="roles" :required="true">
-                        <x-option value="" :title="__('Chọn roles')" />
-                        @foreach ($roles as $key => $value)
+                    <label class="control-label">{{ __('Status') }}:</label>
+                    <x-select name="status" :required="true">
+                        <x-option value="" :title="__('Chọn status')" />
+                        @foreach ($status as $key => $value)
                             <x-option :value="$key" :title="__($value)" />
                         @endforeach
                     </x-select>

@@ -9,7 +9,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"
                                     class="text-muted">{{ __('Dashboard') }}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ __('Sửa Admin') }}</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ __('Sửa Thành viên') }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -18,11 +18,11 @@
     </div>
     <div class="page-body">
         <div class="container-xl">
-            <x-form :action="route('admin.admin.update')" type="put" :validate="true">
-                <x-input type="hidden" name="id" :value="$post->id" />
+            <x-form :action="route('admin.user.update')" type="put" :validate="true">
+                <x-input type="hidden" name="id" :value="$user->id" />
                 <div class="row justify-content-center">
-                    @include('admin.post.forms.edit-left')
-                    @include('admin.post.forms.edit-right')
+                    @include('admin.users.forms.edit-left', ['user' => $user])
+                    @include('admin.users.forms.edit-right', ['user' => $user])
                 </div>
             </x-form>
         </div>

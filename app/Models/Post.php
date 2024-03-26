@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\Post\PostFeature;
+use App\Enums\Post\PostStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,8 +48,9 @@ class Post extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        // 'email_verified_at' => 'datetime',
-        // 'roles' => UserRoles::class,
+        'email_verified_at' => 'datetime',
+        'status' => PostStatus::class,
+        'is_featured' => PostFeature::class
         // 'gender' => UserGender::class,
         // 'vip' => UserVip::class,
         // 'active' => 'boolean'

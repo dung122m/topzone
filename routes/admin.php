@@ -39,6 +39,18 @@ Route::group(['middleware' => 'auth.admin:admin'], function(){
         });
         Route::get('/select-search', [AdminSearchController::class, 'selectSearch'])->name('selectsearch');
     });
+    //employee
+    Route::prefix('/manager-employee')->as('employee.')->group(function(){
+        Route::controller(App\Admin\Http\Controllers\Post\PostController::class)->group(function(){
+            Route::get('/them', 'create')->name('create');
+            Route::get('/', 'index')->name('index');
+            Route::get('/sua/{id}', 'edit')->name('edit');
+            Route::put('/sua', 'update')->name('update');
+            Route::post('/them', 'store')->name('store');
+            Route::delete('/xoa/{id}', 'delete')->name('delete');
+        });
+        Route::get('/select-search', [AdminSearchController::class, 'selectSearch'])->name('selectsearch');
+    });
     //admin
     Route::prefix('/manager-admin')->as('admin.')->group(function(){
         Route::controller(App\Admin\Http\Controllers\Admin\AdminController::class)->group(function(){

@@ -90,12 +90,20 @@ return [
         'title' => [
             'title' => 'Title',
             'orderable' => false,
-            'visible' => false
+            
         ],
-        'content' => [
-            'title' => 'Content',
-            'orderable' => false
+        'status' => [
+            'title' => 'Status',
+            'orderable' => false,
         ],
+        'is_featured' => [
+             'title' => 'Feature',
+            'orderable' => false,
+        ],
+        // 'content' => [
+        //     'title' => 'Content',
+        //     'orderable' => false
+        // ],
         'slug' => [
             'title' => 'Slug',
             'orderable' => false,
@@ -107,13 +115,13 @@ return [
         'posted_at' => [
             'title' => 'Posted at',
             'orderable' => false,
-            'visible' => false
+            
         ],
         
         'created_at' => [
             'title' => 'Ngày tạo',
             'orderable' => false,
-            'visible' => false
+            
         ],
         'action' => [
             'title' => 'Thao tác',

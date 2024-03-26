@@ -43,12 +43,13 @@ class PostDataTable extends BaseDataTable
     public function dataTable($query)
     {
         $this->instanceDataTable = datatables()->eloquent($query)->addIndexColumn();
-        $this->filterColumnCreatedAt();
-        $this->filterColumnGender();
-        $this->filterColumnVip();
-        $this->editColumnFullname();
-        $this->editColumnGender();
-        $this->editColumnVip();
+        // $this->filterColumnCreatedAt();
+        // $this->filterColumnStatus();
+        // $this->filterColumnVip();
+        // $this->editColumnTitle();
+        $this->editColumnFeature();
+        $this->editColumnPostedAt();
+        $this->editColumnStatus();
         $this->editColumnCreatedAt();
         $this->addColumnAction();
         $this->rawColumnsNew();
@@ -61,7 +62,7 @@ class PostDataTable extends BaseDataTable
      * @param \App\Models\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(\App\Models\User $model)
+    public function query(\App\Models\Post $model)
     {
         return $model->newQuery();
     }
@@ -74,7 +75,7 @@ class PostDataTable extends BaseDataTable
     public function html()
     {
         $this->instanceHtml = $this->builder()
-        ->setTableId('userTable')
+        ->setTableId('postTable')
         ->columns($this->getColumns())
         ->minifiedAjax()
         ->dom('Bfrtip')
@@ -92,48 +93,58 @@ class PostDataTable extends BaseDataTable
      * @return array
      */
     protected function setCustomColumns(){
-        $this->customColumns = $this->traitGetConfigDatatableColumns('user');
+        $this->customColumns = $this->traitGetConfigDatatableColumns('post');
     }
+    // protected function editColumnTitle(){
+    //      $this->instanceDataTable = $this->instanceDataTable->editColumn('title', $this->view['editlink']);
+    // }
 
     protected function filename(): string
     {
         return 'User_' . date('YmdHis');
     }
 
-    protected function filterColumnGender(){
-        $this->instanceDataTable = $this->instanceDataTable
-        ->filterColumn('gender', function($query, $keyword) {
-            $query->where('gender', $keyword);
-        });
-    }
-    protected function filterColumnVip(){
-        $this->instanceDataTable = $this->instanceDataTable
-        ->filterColumn('vip', function($query, $keyword) {
-            $query->where('vip', $keyword);
-        });
-    }
-    protected function filterColumnCreatedAt(){
-        $this->instanceDataTable = $this->instanceDataTable->filterColumn('created_at', function($query, $keyword) {
 
-            $query->whereDate('created_at', date('Y-m-d', strtotime($keyword)));
+    // protected function filterColumnGender(){
+    //     $this->instanceDataTable = $this->instanceDataTable
+    //     ->filterColumn('gender', function($query, $keyword) {
+    //         $query->where('gender', $keyword);
+    //     });
+    // }
+    // protected function filterColumnVip(){
+    //     $this->instanceDataTable = $this->instanceDataTable
+    //     ->filterColumn('vip', function($query, $keyword) {
+    //         $query->where('vip', $keyword);
+    //     });
+    // }
+    // protected function filterColumnCreatedAt(){
+    //     $this->instanceDataTable = $this->instanceDataTable->filterColumn('created_at', function($query, $keyword) {
 
+    //         $query->whereDate('created_at', date('Y-m-d', strtotime($keyword)));
+
+    //     });
+    // }
+    // protected function editColumnId(){
+    //     $this->instanceDataTable = $this->instanceDataTable->editColumn('id', $this->view['editlink']);
+    // }
+    // protected function editColumnTitle(){
+    //     $this->instanceDataTable = $this->instanceDataTable->editColumn('title', $this->view['editlink']);
+    // }
+    protected function editColumnFeature(){
+    $this->instanceDataTable = $this->instanceDataTable->editColumn('is_featured', function($post){
+                return $post->is_featured->description();
         });
     }
-    protected function editColumnId(){
-        $this->instanceDataTable = $this->instanceDataTable->editColumn('id', $this->view['editlink']);
-    }
-    protected function editColumnFullname(){
-        $this->instanceDataTable = $this->instanceDataTable->editColumn('fullname', $this->view['editlink']);
-    }
-    protected function editColumnGender(){
-        $this->instanceDataTable = $this->instanceDataTable->editColumn('gender', function($admin){
-            return $admin->gender->description();
+    protected function editColumnStatus(){
+        $this->instanceDataTable = $this->instanceDataTable->editColumn('status', function($post){
+            return $post->status->description();
         });
     }
-    protected function editColumnVip(){
-        $this->instanceDataTable = $this->instanceDataTable->editColumn('vip', function($admin){
-            return $admin->vip->description();
-        });
+    // protected function editColumnSlug(){
+    //     $this->instanceDataTable = $this->instanceDataTable->editColumn('slug', $this->view['editlink']);
+    // }
+    public function editColumnPostedAt(){
+        $this->instanceDataTable = $this->instanceDataTable->editColumn('posted_at', '{{ date("d-m-Y", strtotime($created_at)) }}');
     }
     protected function editColumnCreatedAt(){
         $this->instanceDataTable = $this->instanceDataTable->editColumn('created_at', '{{ date("d-m-Y", strtotime($created_at)) }}');
@@ -150,7 +161,7 @@ class PostDataTable extends BaseDataTable
 
         $this->parameters['initComplete'] = "function () {
 
-            moveSearchColumnsDatatable('#userTable');
+            moveSearchColumnsDatatable('#postTable');
 
             searchColumsDataTable(this);
         }";
