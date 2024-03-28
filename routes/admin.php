@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth.admin:admin'], function(){
             Route::post('/them', 'store')->name('store');
             Route::delete('/xoa/{id}', 'delete')->name('delete');
         });
-        Route::get('/select-search', [AdminSearchController::class, 'selectSearch'])->name('selectsearch');
+        
     });
     //employee
     Route::prefix('/manager-employee')->as('employee.')->group(function(){
