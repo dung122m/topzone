@@ -7,21 +7,27 @@ interface EloquentRepositoryInterface
     /**
      * Return all records
      *
-     * @param string $orderBy
-     * @param array $relations
-     * @param array $parameters
      * @return mixed
      */
     public function getAll();
     /**
      * Find a single record
      *
-     * @param int $id
+     * @param array $filter
      * @param array $relations
      * @return mixed
      * @throws \Exception
      */
-    public function findOrFail($id);
+    public function findByOrFail(array $filter, array $relations = []);
+    /**
+     * Find a single record
+     *
+     * @param array $filter
+     * @param array $relations
+     * @return mixed
+     * @throws \Exception
+     */
+    public function findBy(array $filter, array $relations = []);
     /**
      * Find a single record
      *
@@ -30,7 +36,16 @@ interface EloquentRepositoryInterface
      * @return mixed
      * @throws \Exception
      */
-    public function find($id);
+    public function findOrFail($id, array $relations = []);
+    /**
+     * Find a single record
+     *
+     * @param int $id
+     * @param array $relations
+     * @return mixed
+     * @throws \Exception
+     */
+    public function find($id, array $relations = []);
     /**
      * Create a new record
      *
@@ -58,19 +73,43 @@ interface EloquentRepositoryInterface
      */
     public function delete($id);
     /**
+     * Return all records
+     *
+     * @param array $relations
+     * @param array $filter
+     * @return mixed
+     */
+    public function getBy(array $filter, array $relations = []);
+    /**
+     * make query
+     * 
+     * @return mixed
+     */
+    public function getByQueryBuilder(array $filter, array $relations = []);
+    /**
+     * make query
+     * 
+     * @return mixed
+     */
+    public function getQueryBuilderOrderBy();
+    /**
      * make query
      * 
      * @return mixed
      */
     public function getQueryBuilder();
     /**
-     * make query
+     * policy
      * 
      * @param string $action
+     * @param string $guard
      * 
      * @return boolean
      */
-    public function authorize($action);
-    
+    public function authorize($action = 'view', $guard = 'web');
+    /**
+     * 
+     * @return mixed
+     */
     public function getInstance();
 }

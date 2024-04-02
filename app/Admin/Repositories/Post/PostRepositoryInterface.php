@@ -4,14 +4,14 @@ namespace App\Admin\Repositories\Post;
 
 interface PostRepositoryInterface
 {
-	/**
+    /**
      * Find a single record
      *
      * @param int $id
      * @return mixed
      * 
      */
-	public function find($id);
+    public function find($id);
     /**
      * Find a single record
      *

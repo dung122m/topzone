@@ -8,15 +8,14 @@
             <div class="col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="control-label">{{ __('Title') }}:</label>
-                    <x-input name="title" :value="$post->title" :required="true" 
-                    placeholder="{{ __('Title') }}"/>
+                    <x-input name="title" :value="$post->title" :required="true" placeholder="{{ __('Title') }}" />
                 </div>
             </div>
             <!-- Fullname -->
             <div class="col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="control-label">{{ __('Slug') }}:</label>
-                    <x-input name="slug" :value="$post->slug" :required="true"
+                    <x-input readonly name="slug" :value="$post->slug" :required="true"
                         placeholder="{{ __('Slug') }}" />
                 </div>
             </div>
@@ -24,50 +23,37 @@
             <div class="col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="control-label">{{ __('Excerpt') }}:</label>
-                    <x-input name="excerpt" :required="true" :value="$post->excerpt"
-                    placeholder="{{ __('Excerpt') }}"/>
+                    <x-input name="excerpt" :required="true" :value="$post->excerpt" placeholder="{{ __('Excerpt') }}" />
                 </div>
+
+            </div>
+            <div class="col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="control-label">{{ __('Posted at') }}:</label>
                     <x-input name="posted_at" :value="$post->posted_at" :required="true" />
                 </div>
             </div>
             <!-- new password confirmation-->
-            <div class="col-md-6 col-sm-12">
+
+
+            <!-- Role -->
+            <div class="col-md-12 col-sm-12">
                 <div class="mb-3">
                     <label class="control-label">{{ __('Content') }}:</label>
-                    <x-textarea name="content" :required="true"  rows="10"
-
-                    > {{ $post->content  }}</x-textarea>
-                </div>
-            
-            </div>
-            
-            <!-- Role -->
-            <div class="col-md-6 col-sm-12">
-            <div class="mb-3">
-                <label class="control-label">{{ __('Status') }}:</label>
-                    <x-select name="status" :required="true">
-                                <x-option value="" :title="__('Chọn status')" />
-                                @foreach ($status as $key => $value)
-                                   
-                                   <x-option :option="$post->status->value" :value="$key" :title="__($value)" />
-                                @endforeach
-                    </x-select>
-                </div>
-                <div class="mb-3">
-                <label class="control-label">{{ __('Feature') }}:</label>
-                    <x-select name="is_featured" :required="true">
-                                <x-option value="" :title="__('Feature')" />
-                                @foreach ($feature as $key => $value)
-                                     <x-option :option="$post->is_featured->value" :value="$key" :title="__($value)" />
-                                @endforeach
-                    </x-select>
+                    <textarea class="ckeditor vissally-hidden" name="content" :required="true" rows="10"> {{ $post->content }}</textarea>
                 </div>
 
             </div>
 
-            
+
         </div>
+
     </div>
 </div>
+@push('libs-js')
+    <script src="{{ asset('/libs/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('/libs/ckeditor/adapters/jquery.js') }}"></script>
+    @include('ckfinder::setup')
+    <script src="{{ asset('/libs/select2/dist/js/select2.min.js') }}"></script>
+    <script src="{{ asset('/libs/select2/dist/js/i18n/' . trans()->getLocale() . '.js') }}"></script>
+@endpush

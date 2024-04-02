@@ -90,14 +90,14 @@ return [
         'title' => [
             'title' => 'Title',
             'orderable' => false,
-            
+
         ],
         'status' => [
             'title' => 'Status',
             'orderable' => false,
         ],
         'is_featured' => [
-             'title' => 'Feature',
+            'title' => 'Feature',
             'orderable' => false,
         ],
         // 'content' => [
@@ -115,13 +115,13 @@ return [
         'posted_at' => [
             'title' => 'Posted at',
             'orderable' => false,
-            
+
         ],
-        
+
         'created_at' => [
             'title' => 'Ngày tạo',
             'orderable' => false,
-            
+
         ],
         'action' => [
             'title' => 'Thao tác',
@@ -137,7 +137,7 @@ return [
             'width' => '20px',
             'orderable' => false
         ],
-        
+
         'fullname' => [
             'title' => 'Họ tên',
             'orderable' => false
@@ -145,29 +145,67 @@ return [
         'username' => [
             'title' => 'Tên đăng nhập',
             'orderable' => false,
-          
+
         ],
         'email' => [
             'title' => 'Email',
             'orderable' => false,
         ],
-        
+
         'gender' => [
             'title' => 'Giới tính',
             'width' => '20px',
 
             'orderable' => false,
-           
+
         ],
         'roles' => [
             'title' => 'Roles',
             'orderable' => false,
         ],
-        
+
         'created_at' => [
             'title' => 'Ngày tạo',
             'orderable' => false,
-           
+
+        ],
+        'action' => [
+            'title' => 'Thao tác',
+            'orderable' => false,
+            'exportable' => false,
+            'printable' => false,
+            'addClass' => 'text-center'
+        ],
+    ],
+    'category' => [
+        'DT_RowIndex' => [
+            'title' => 'STT',
+            'width' => '20px',
+            'orderable' => false
+        ],
+
+        'name' => [
+            'title' => 'Title',
+            'orderable' => false
+        ],
+        'slug' => [
+            'title' => 'Slug',
+            'orderable' => false,
+
+        ],
+        'status' => [
+            'title' => 'Status',
+            'orderable' => false,
+        ],
+        'parent_id' => [
+            'title' => 'Parent category',
+            'orderable' => false,
+        ],
+
+        'created_at' => [
+            'title' => 'Ngày tạo',
+            'orderable' => false,
+
         ],
         'action' => [
             'title' => 'Thao tác',

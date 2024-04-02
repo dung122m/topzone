@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\DefaultStatus;
 use App\Enums\Post\PostFeature;
 use App\Enums\Post\PostStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,8 +52,33 @@ class Post extends Authenticatable
         'email_verified_at' => 'datetime',
         'status' => PostStatus::class,
         'is_featured' => PostFeature::class
-        // 'gender' => UserGender::class,
-        // 'vip' => UserVip::class,
-        // 'active' => 'boolean'
+
     ];
+    public function isPublished()
+    {
+        return $this->status == DefaultStatus::Published;
+    }
+    public function posts()
+    {
+        return $this->hasMany(Post::class, "id");
+    }
+    public function categories()
+    {
+        return $this->belongsToMany(
+            Category::class,
+            'post_categories',
+            'post_id',
+            'category_id'
+        );
+    }
+    public function scopePublished($query)
+    {
+        return $query->where('status', DefaultStatus::Published);
+    }
+    public function scopeHasCategories($query, array $categoriesId)
+    {
+        return $query->whereHas('categories', function ($query) use ($categoriesId) {
+            $query->whereIn('id', $categoriesId);
+        });
+    }
 }

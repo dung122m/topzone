@@ -15,21 +15,24 @@ class PostRequest extends BaseRequest
     protected function methodPost()
     {
         return [
-            
+
             'title' => [
-                'required', 
-                'string', 'min:6', 'max:100',
+                'required',
+                'string',
+                'min:6',
+                'max:100',
                 //regex: 
-                
+
             ],
-            'slug' => ['required', 'string'],
-            'status' =>'required',
+            'image' => 'required',
+            'slug' => ['string'],
+            'status' => 'required',
             'is_featured' => 'required',
             'excerpt' => 'required',
             'content' => 'required'
-           
-           
-           
+
+
+
         ];
     }
 
@@ -38,17 +41,21 @@ class PostRequest extends BaseRequest
         return [
             'id' => ['required', 'exists:App\Models\Post,id'],
             'title' => [
-                'required', 
-                'string', 'min:6', 'max:100',
+                'required',
+                'string',
+                'min:6',
+                'max:100',
             ],
+            'image' => 'required',
+
             'slug' => ['required', 'string'],
-            'status' =>'required',
+            'status' => 'required',
             'is_featured' => 'required',
             'excerpt' => 'required',
             'content' => 'required'
-           
-           
-           
+
+
+
         ];
     }
 }

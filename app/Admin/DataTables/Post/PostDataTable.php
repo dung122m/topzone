@@ -22,13 +22,14 @@ class PostDataTable extends BaseDataTable
 
     public function __construct(
         PostRepositoryInterface $repository
-    ){
+    ) {
         parent::__construct();
 
         $this->repository = $repository;
     }
 
-    public function getView(){
+    public function getView()
+    {
         return [
             'action' => 'admin.post.datatable.action',
             'editlink' => 'admin.post.datatable.editlink',
@@ -46,7 +47,7 @@ class PostDataTable extends BaseDataTable
         // $this->filterColumnCreatedAt();
         // $this->filterColumnStatus();
         // $this->filterColumnVip();
-        // $this->editColumnTitle();
+        $this->editColumnTitle();
         $this->editColumnFeature();
         $this->editColumnPostedAt();
         $this->editColumnStatus();
@@ -55,7 +56,7 @@ class PostDataTable extends BaseDataTable
         $this->rawColumnsNew();
         return $this->instanceDataTable;
     }
-    
+
     /**
      * Get query source of dataTable.
      *
@@ -75,12 +76,12 @@ class PostDataTable extends BaseDataTable
     public function html()
     {
         $this->instanceHtml = $this->builder()
-        ->setTableId('postTable')
-        ->columns($this->getColumns())
-        ->minifiedAjax()
-        ->dom('Bfrtip')
-        ->orderBy(0)
-        ->selectStyleSingle();
+            ->setTableId('postTable')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(0)
+            ->selectStyleSingle();
 
         $this->htmlParameters();
 
@@ -92,7 +93,8 @@ class PostDataTable extends BaseDataTable
      *
      * @return array
      */
-    protected function setCustomColumns(){
+    protected function setCustomColumns()
+    {
         $this->customColumns = $this->traitGetConfigDatatableColumns('post');
     }
     // protected function editColumnTitle(){
@@ -127,35 +129,43 @@ class PostDataTable extends BaseDataTable
     // protected function editColumnId(){
     //     $this->instanceDataTable = $this->instanceDataTable->editColumn('id', $this->view['editlink']);
     // }
-    // protected function editColumnTitle(){
-    //     $this->instanceDataTable = $this->instanceDataTable->editColumn('title', $this->view['editlink']);
-    // }
-    protected function editColumnFeature(){
-    $this->instanceDataTable = $this->instanceDataTable->editColumn('is_featured', function($post){
-                return $post->is_featured->description();
+    protected function editColumnTitle()
+    {
+        $this->instanceDataTable = $this->instanceDataTable->editColumn('title', $this->view['editlink']);
+    }
+    protected function editColumnFeature()
+    {
+        $this->instanceDataTable = $this->instanceDataTable->editColumn('is_featured', function ($post) {
+            return $post->is_featured->description();
         });
     }
-    protected function editColumnStatus(){
-        $this->instanceDataTable = $this->instanceDataTable->editColumn('status', function($post){
+    protected function editColumnStatus()
+    {
+        $this->instanceDataTable = $this->instanceDataTable->editColumn('status', function ($post) {
             return $post->status->description();
         });
     }
     // protected function editColumnSlug(){
     //     $this->instanceDataTable = $this->instanceDataTable->editColumn('slug', $this->view['editlink']);
     // }
-    public function editColumnPostedAt(){
+    public function editColumnPostedAt()
+    {
         $this->instanceDataTable = $this->instanceDataTable->editColumn('posted_at', '{{ date("d-m-Y", strtotime($created_at)) }}');
     }
-    protected function editColumnCreatedAt(){
+    protected function editColumnCreatedAt()
+    {
         $this->instanceDataTable = $this->instanceDataTable->editColumn('created_at', '{{ date("d-m-Y", strtotime($created_at)) }}');
     }
-    protected function addColumnAction(){
+    protected function addColumnAction()
+    {
         $this->instanceDataTable = $this->instanceDataTable->addColumn('action', $this->view['action']);
     }
-    protected function rawColumnsNew(){
-        $this->instanceDataTable = $this->instanceDataTable->rawColumns(['fullname', 'action']);
+    protected function rawColumnsNew()
+    {
+        $this->instanceDataTable = $this->instanceDataTable->rawColumns(['title', 'action']);
     }
-    protected function htmlParameters(){
+    protected function htmlParameters()
+    {
 
         $this->parameters['buttons'] = $this->actions;
 
@@ -167,6 +177,6 @@ class PostDataTable extends BaseDataTable
         }";
 
         $this->instanceHtml = $this->instanceHtml
-        ->parameters($this->parameters);
+            ->parameters($this->parameters);
     }
 }

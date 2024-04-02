@@ -1,6 +1,5 @@
 <?php
 
-use App\Admin\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Admin\Http\Controllers\Home\HomeController::class, 'index']);
 
-// Route::get("/topzone-codebase/admin/login",[AdminController::class, 'login'])->name("login");s
+Route::controller(App\Http\Controllers\Blog\BlogController::class)
+    ->prefix('/')
+    ->as('blog.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/detail/{slug}', 'showPost')->name('show');
+
+    });

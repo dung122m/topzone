@@ -69,6 +69,26 @@ return [
         ]
     ],
     [
+        'title' => 'QL Danh mục',
+        'routeName' => null,
+        'icon' => '<i class="ti ti-book"></i>',
+        'roles' => [],
+        'sub' => [
+            [
+                'title' => 'Thêm Danh mục',
+                'routeName' => 'admin.category.create',
+                'icon' => '<i class="ti ti-plus"></i>',
+                'roles' => [],
+            ],
+            [
+                'title' => 'DS Danh mục',
+                'routeName' => 'admin.category.index',
+                'icon' => '<i class="ti ti-list"></i>',
+                'roles' => [],
+            ],
+        ]
+    ],
+    [
         'title' => 'QL Nhân viên',
         'routeName' => null,
         'icon' => '<i class="ti ti-users"></i>',
